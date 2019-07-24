@@ -3,8 +3,8 @@ import flow_messages_enriched_pb2 as api # this needs to be in the local path
 
 flow_direction = {
         0: "Incoming",
-        1: "Outgoing"
-        }
+        1: "Outgoing"}
+
 etype = {
         0x0800: "IPv4",
         0x0806: "ARP",
@@ -22,34 +22,34 @@ etype = {
         0x88E5: "MAC Security",
         0x8906: "Fibre Channel over Ethernet (FCoE)",
         0x8914: "FCoE Initialization Protocol",
-        0x9000: "Ethernet Configuration Testing Protocol"
-        }
+        0x9000: "Ethernet Configuration Testing Protocol"}
+
 forwarding_status = {
-        0 : 'Unknown',
-        64 : 'Forwarded (Unknown)',
-        65 : 'Forwarded (Fragmented)',
-        66 : 'Forwarded (Not Fragmented)',
-        128 : 'Dropped (Unknown)',
-        129 : 'Dropped (ACL Deny)',
-        130 : 'Dropped (ACL Drop)',
-        131 : 'Dropped (Unroutable)',
-        132 : 'Dropped (Adjacency)',
-        133 : 'Dropped (Fragmented and DF set)',
-        134 : 'Dropped (Bad Header Checksum)',
-        135 : 'Dropped (Bad Total Length)',
-        136 : 'Dropped (Bad Header Length)',
-        137 : 'Dropped (Bad TTL)',
-        138 : 'Dropped (Policer)',
-        139 : 'Dropped (WRED)',
-        140 : 'Dropped (RPF)',
-        141 : 'Dropped (For Us)',
-        142 : 'Dropped (Bad Output Interface)',
-        143 : 'Dropped (Hardware)',
-        192 : 'Consumed (Unknown)',
-        193 : 'Consumed (Terminate Punt Adjacency)',
-        194 : 'Consumed (Terminate Incomplete Adjacency)',
-        195 : 'Consumed (Terminate For Us)'
-        }
+        0 : "Unknown",
+        64 : "Forwarded (Unknown)",
+        65 : "Forwarded (Fragmented)",
+        66 : "Forwarded (Not Fragmented)",
+        128 : "Dropped (Unknown)",
+        129 : "Dropped (ACL Deny)",
+        130 : "Dropped (ACL Drop)",
+        131 : "Dropped (Unroutable)",
+        132 : "Dropped (Adjacency)",
+        133 : "Dropped (Fragmented and DF set)",
+        134 : "Dropped (Bad Header Checksum)",
+        135 : "Dropped (Bad Total Length)",
+        136 : "Dropped (Bad Header Length)",
+        137 : "Dropped (Bad TTL)",
+        138 : "Dropped (Policer)",
+        139 : "Dropped (WRED)",
+        140 : "Dropped (RPF)",
+        141 : "Dropped (For Us)",
+        142 : "Dropped (Bad Output Interface)",
+        143 : "Dropped (Hardware)",
+        192 : "Consumed (Unknown)",
+        193 : "Consumed (Terminate Punt Adjacency)",
+        194 : "Consumed (Terminate Incomplete Adjacency)",
+        195 : "Consumed (Terminate For Us)"}
+
 ipv6_extension_headers = {
         2**0:  "Res",
         2**1:  "FRAX",
