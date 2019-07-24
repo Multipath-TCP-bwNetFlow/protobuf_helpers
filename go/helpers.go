@@ -2,6 +2,8 @@ package protobuf_helpers
 
 import (
 	flow "github.com/bwNetFlow/protobuf/go"
+	"math"
+	"strings"
 )
 
 var (
@@ -51,6 +53,40 @@ var (
 		193: "Consumed (Terminate Punt Adjacency)",
 		194: "Consumed (Terminate Incomplete Adjacency)",
 		195: "Consumed (Terminate For Us)"}
+	IPv6ExtensionHeadersMap = map[uint32]string{
+		uint32(math.Pow(2, 0)):  "DST",
+		uint32(math.Pow(2, 1)):  "HOP",
+		uint32(math.Pow(2, 2)):  "Res",
+		uint32(math.Pow(2, 3)):  "UNK",
+		uint32(math.Pow(2, 4)):  "FRA0",
+		uint32(math.Pow(2, 5)):  "RH",
+		uint32(math.Pow(2, 6)):  "FRA1",
+		uint32(math.Pow(2, 7)):  "Res",
+		uint32(math.Pow(2, 8)):  "Res",
+		uint32(math.Pow(2, 9)):  "Res",
+		uint32(math.Pow(2, 10)): "Res",
+		uint32(math.Pow(2, 11)): "Res",
+		uint32(math.Pow(2, 12)): "MOB",
+		uint32(math.Pow(2, 13)): "ESP",
+		uint32(math.Pow(2, 14)): "AH",
+		uint32(math.Pow(2, 15)): "PAY",
+		uint32(math.Pow(2, 16)): "Res",
+		uint32(math.Pow(2, 17)): "Res",
+		uint32(math.Pow(2, 17)): "Res",
+		uint32(math.Pow(2, 18)): "Res",
+		uint32(math.Pow(2, 19)): "Res",
+		uint32(math.Pow(2, 20)): "Res",
+		uint32(math.Pow(2, 21)): "Res",
+		uint32(math.Pow(2, 22)): "Res",
+		uint32(math.Pow(2, 23)): "Res",
+		uint32(math.Pow(2, 24)): "Res",
+		uint32(math.Pow(2, 25)): "Res",
+		uint32(math.Pow(2, 26)): "Res",
+		uint32(math.Pow(2, 27)): "Res",
+		uint32(math.Pow(2, 28)): "Res",
+		uint32(math.Pow(2, 29)): "Res",
+		uint32(math.Pow(2, 30)): "Res",
+		uint32(math.Pow(2, 31)): "Res"}
 )
 
 type FlowHelper struct {
@@ -133,4 +169,14 @@ func (flow *FlowHelper) IsForwarded() bool {
 
 func (flow *FlowHelper) IsUnknownForwardingStatus() bool {
 	return flow.GetForwardingStatus() < 64
+}
+
+func (flow *FlowHelper) IPv6ExtensionHeadersString() string {
+	var flagnames []string
+	for val, name := range IPv6ExtensionHeadersMap {
+		if flow.IPv6ExtensionHeaders&val == 1 {
+			flagnames = append(flagnames, name)
+		}
+	}
+	return strings.Join(flagnames, " - ")
 }
