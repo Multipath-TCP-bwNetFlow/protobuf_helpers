@@ -50,44 +50,6 @@ forwarding_status = {
         194 : "Consumed (Terminate Incomplete Adjacency)",
         195 : "Consumed (Terminate For Us)"}
 
-ipv6_extension_headers = {
-        2**0:  "Res",
-        2**1:  "FRAX",
-        2**2:  "RH",
-        2**3:  "FRA0",
-        2**4:  "UNK",
-        2**5:  "Res",
-        2**6:  "HOP",
-        2**7:  "DST",
-        2**8:  "PAY",
-        2**9:  "AH",
-        2**10: "ESP",
-        2**11: "MOB", # also Res for Cisco Routers
-        2**12: "Res", 2**13: "Res", 2**14: "Res", 2**15: "Res", 2**16: "Res", 2**17: "Res",
-        2**18: "Res", 2**19: "Res", 2**20: "Res", 2**21: "Res", 2**22: "Res", 2**23: "Res",
-        2**24: "Res", 2**25: "Res", 2**26: "Res", 2**27: "Res", 2**28: "Res", 2**29: "Res",
-        2**30: "Res", 2**31: "Res", 2**32: "Res"}
-
-ipv6_extension_headers_long = {
-        2**0:  "Reserved",
-        2**1:  "Fragment header - not first fragment",
-        2**2:  "Routing Header (any type)",
-        2**3:  "Fragment header - first fragment",
-        2**4:  "Unknown Layer 4 header (compressed, encrypted, not supported)",
-        2**5:  "Reserved",
-        2**6:  "Hop-by-Hop",
-        2**7:  "Destination Options",
-        2**8:  "Payload compression",
-        2**9:  "Authentication Header",
-        2**10: "Encapsulating Security Payload",
-        2**11: "IPv6 mobility [RFC3775]", # also Reserved for Cisco Routers
-        2**12: "Reserved", 2**13: "Reserved", 2**14: "Reserved", 2**15: "Reserved",
-        2**16: "Reserved", 2**17: "Reserved", 2**18: "Reserved", 2**19: "Reserved",
-        2**20: "Reserved", 2**21: "Reserved", 2**22: "Reserved", 2**23: "Reserved",
-        2**24: "Reserved", 2**25: "Reserved", 2**26: "Reserved", 2**27: "Reserved",
-        2**28: "Reserved", 2**29: "Reserved", 2**30: "Reserved", 2**31: "Reserved",
-        2**32: "Reserved"}
-
 class FlowHelper():
     def __init__(self, flowmsg):
         self.flowmsg = flowmsg
@@ -146,11 +108,3 @@ class FlowHelper():
 
     def is_unknown_forwardingstatus(self):
         return self.flowmsg.ForwardingStatus < 64
-
-    def ipv6_extensionheaders_str(self):
-        flags = [flag for val, flag in ipv6_extension_headers.items() if self.flowmsg.IPv6ExtensionHeaders & val]
-        return " - ".join(flags)
-
-    def ipv6_extensionheaders_long_str(self):
-        flags = [flag for val, flag in ipv6_extension_headers_long.items() if self.flowmsg.IPv6ExtensionHeaders & val]
-        return ", ".join(flags)

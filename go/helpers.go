@@ -2,8 +2,6 @@ package protobuf_helpers
 
 import (
 	flow "github.com/bwNetFlow/protobuf/go"
-	"math"
-	"strings"
 )
 
 var (
@@ -53,54 +51,6 @@ var (
 		193: "Consumed (Terminate Punt Adjacency)",
 		194: "Consumed (Terminate Incomplete Adjacency)",
 		195: "Consumed (Terminate For Us)"}
-	IPv6ExtensionHeadersMap = map[uint32]string{
-		uint32(math.Pow(2, 0)):  "Res",
-		uint32(math.Pow(2, 1)):  "FRAx",
-		uint32(math.Pow(2, 2)):  "RH",
-		uint32(math.Pow(2, 3)):  "FRA0",
-		uint32(math.Pow(2, 4)):  "UNK",
-		uint32(math.Pow(2, 5)):  "Res",
-		uint32(math.Pow(2, 6)):  "HOP",
-		uint32(math.Pow(2, 7)):  "DST",
-		uint32(math.Pow(2, 8)):  "PAY",
-		uint32(math.Pow(2, 9)):  "AH",
-		uint32(math.Pow(2, 10)): "ESP",
-		uint32(math.Pow(2, 11)): "MOB", // Res on Cisco Routers
-		uint32(math.Pow(2, 12)): "Res", uint32(math.Pow(2, 13)): "Res",
-		uint32(math.Pow(2, 14)): "Res", uint32(math.Pow(2, 15)): "Res",
-		uint32(math.Pow(2, 16)): "Res", uint32(math.Pow(2, 17)): "Res",
-		uint32(math.Pow(2, 17)): "Res", uint32(math.Pow(2, 18)): "Res",
-		uint32(math.Pow(2, 19)): "Res", uint32(math.Pow(2, 20)): "Res",
-		uint32(math.Pow(2, 21)): "Res", uint32(math.Pow(2, 22)): "Res",
-		uint32(math.Pow(2, 23)): "Res", uint32(math.Pow(2, 24)): "Res",
-		uint32(math.Pow(2, 25)): "Res", uint32(math.Pow(2, 26)): "Res",
-		uint32(math.Pow(2, 27)): "Res", uint32(math.Pow(2, 28)): "Res",
-		uint32(math.Pow(2, 29)): "Res", uint32(math.Pow(2, 30)): "Res",
-		uint32(math.Pow(2, 31)): "Res"}
-	IPv6ExtensionHeadersLongMap = map[uint32]string{
-		uint32(math.Pow(2, 0)):  "Reserved",
-		uint32(math.Pow(2, 1)):  "Fragment header - not first fragment",
-		uint32(math.Pow(2, 2)):  "Routing Header (any type)",
-		uint32(math.Pow(2, 3)):  "Fragment header - first fragment",
-		uint32(math.Pow(2, 4)):  "Unknown Layer 4 header (compressed, encrypted, not supported)",
-		uint32(math.Pow(2, 5)):  "Reserved",
-		uint32(math.Pow(2, 6)):  "Hop-by-Hop",
-		uint32(math.Pow(2, 7)):  "Destination Options",
-		uint32(math.Pow(2, 8)):  "Payload compression",
-		uint32(math.Pow(2, 9)):  "Authentication Header",
-		uint32(math.Pow(2, 10)): "Encapsulating Security Payload",
-		uint32(math.Pow(2, 11)): "IPv6 mobility [RFC3775]", // Reserved on Cisco Routers
-		uint32(math.Pow(2, 12)): "Reserved", uint32(math.Pow(2, 13)): "Reserved",
-		uint32(math.Pow(2, 14)): "Reserved", uint32(math.Pow(2, 15)): "Reserved",
-		uint32(math.Pow(2, 16)): "Reserved", uint32(math.Pow(2, 17)): "Reserved",
-		uint32(math.Pow(2, 17)): "Reserved", uint32(math.Pow(2, 18)): "Reserved",
-		uint32(math.Pow(2, 19)): "Reserved", uint32(math.Pow(2, 20)): "Reserved",
-		uint32(math.Pow(2, 21)): "Reserved", uint32(math.Pow(2, 22)): "Reserved",
-		uint32(math.Pow(2, 23)): "Reserved", uint32(math.Pow(2, 24)): "Reserved",
-		uint32(math.Pow(2, 25)): "Reserved", uint32(math.Pow(2, 26)): "Reserved",
-		uint32(math.Pow(2, 27)): "Reserved", uint32(math.Pow(2, 28)): "Reserved",
-		uint32(math.Pow(2, 29)): "Reserved", uint32(math.Pow(2, 30)): "Reserved",
-		uint32(math.Pow(2, 31)): "Reserved"}
 )
 
 type FlowHelper struct {
@@ -183,24 +133,4 @@ func (flow *FlowHelper) IsForwarded() bool {
 
 func (flow *FlowHelper) IsUnknownForwardingStatus() bool {
 	return flow.GetForwardingStatus() < 64
-}
-
-func (flow *FlowHelper) IPv6ExtensionHeadersString() string {
-	var flagnames []string
-	for val, name := range IPv6ExtensionHeadersMap {
-		if flow.IPv6ExtensionHeaders&val == 1 {
-			flagnames = append(flagnames, name)
-		}
-	}
-	return strings.Join(flagnames, " - ")
-}
-
-func (flow *FlowHelper) IPv6ExtensionHeadersLongString() string {
-	var flagnames []string
-	for val, name := range IPv6ExtensionHeadersLongMap {
-		if flow.IPv6ExtensionHeaders&val == 1 {
-			flagnames = append(flagnames, name)
-		}
-	}
-	return strings.Join(flagnames, ", ")
 }
