@@ -1,7 +1,7 @@
 package protobuf_helpers
 
 import (
-	flow "github.com/bwNetFlow/protobuf/go"
+	flow "github.com/SubmergedTree/mptcp-flow-protobuf"
 )
 
 var (
